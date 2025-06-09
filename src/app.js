@@ -1,4 +1,7 @@
 import Alpine from "alpinejs";
+import persist from '@alpinejs/persist'
+ 
+Alpine.plugin(persist)
 
 const W_TILE = 10
 const W_JOINT = .25
@@ -18,118 +21,122 @@ export default class App {
 
 		document.addEventListener('alpine:init', () => {
 
-			Alpine.data('app', () => ({
+			Alpine.data('app', function () {
 
-				width: 265,
-				height: 249,
-				columns: 0,
-				rows: 0,
-				templateColumns: 'repeat(26, 1fr)',
-				templateRows: 'repeat(24, 1fr)',
-				aspectRatio: '1.064257028',
+				return {
 
-				collection: {
+					width: this.$persist(265),
+					height: this.$persist(249),
+					columns: this.$persist(0),
+					rows: this.$persist(0),
+					templateColumns: this.$persist('repeat(26, 1fr)'),
+					templateRows: this.$persist('repeat(24, 1fr)'),
+					aspectRatio: this.$persist('1.064257028'),
 
-					tile16900: {
-						active: true,
-						distribution: 4,
+					collection: this.$persist({
+
+						tile16900: {
+							active: true,
+							distribution: 4,
+						},
+						tile16905: {
+							active: true,
+							distribution: 4,
+						},
+						tile16906: {
+							active: true,
+							distribution: 4,
+						},
+						tile16901ne: {
+							active: true,
+							distribution: 1,
+						},
+						tile16901se: {
+							active: true,
+							distribution: 1,
+						},
+						tile16901sw: {
+							active: true,
+							distribution: 1,
+						},
+						tile16901nw: {
+							active: true,
+							distribution: 1,
+						},
+
+					}),
+
+					distribution: function () {
+						let total = 0;
+						for ( const property in this.collection ) {
+							const tile = this.collection[property]
+							if ( tile.active ) total += parseInt(tile.distribution)
+						}
+						return total;
 					},
-					tile16905: {
-						active: true,
-						distribution: 4,
-					},
-					tile16906: {
-						active: true,
-						distribution: 4,
-					},
-					tile16901ne: {
-						active: true,
-						distribution: 1,
-					},
-					tile16901se: {
-						active: true,
-						distribution: 1,
-					},
-					tile16901sw: {
-						active: true,
-						distribution: 1,
-					},
-					tile16901nw: {
-						active: true,
-						distribution: 1,
+
+					distributionString: function (tile) {
+						if ( !tile.active ) return '';
+						const total = this.distribution()
+						const pct = Math.round(tile.distribution / total * 10000) / 100
+
+						return `${tile.distribution} / ${total} (${pct}%)`
 					},
 
-				},
+					calculateGrid: function () {
+						this.columns = Math.ceil( this.width / ( W_TILE + W_JOINT ) )
+						this.rows = Math.floor( this.height / ( W_TILE + W_JOINT ) )
+						this.templateColumns = 'repeat(' + this.columns + ', 1fr)'
+						this.templateRows = 'repeat(' + this.rows + ', 1fr)'
+					},
+					generateTiles: function () {
+						this.$refs.tiles.replaceChildren()
+						const q = this.columns * this.rows
 
-				distribution: function () {
-					let total = 0;
-					for ( const property in this.collection ) {
-						const tile = this.collection[property]
-						if ( tile.active ) total += parseInt(tile.distribution)
-					}
-					return total;
-				},
-
-				distributionString: function (tile) {
-					if ( !tile.active ) return '';
-					const total = this.distribution()
-					const pct = Math.round(tile.distribution / total * 10000) / 100
-
-					return `${tile.distribution} / ${total} (${pct}%)`
-				},
-
-				calculateGrid: function () {
-					this.columns = Math.ceil( this.width / ( W_TILE + W_JOINT ) )
-					this.rows = Math.floor( this.height / ( W_TILE + W_JOINT ) )
-					this.templateColumns = 'repeat(' + this.columns + ', 1fr)'
-					this.templateRows = 'repeat(' + this.rows + ', 1fr)'
-				},
-				generateTiles: function () {
-					this.$refs.tiles.replaceChildren()
-					const q = this.columns * this.rows
-
-					for( let i = 0; i < q; i++ ) {
-						const d = document.createElement('div')
-						this.$refs.tiles.append(d)
-					}
-				},
-				shuffleTiles: function () {
-					const a = Array.from(this.$refs.tiles.children)
-					shuffleArray(a)
-					a.forEach( $e => $refs.tiles.append($e) )
-				},
-				distribute: function () {
-					let classes = []
-					for ( const tilename in this.collection ) {
-						const tile = this.collection[tilename]
-						if ( tile.active ) {
-							const n = Math.ceil( tile.distribution / this.distribution() * this.$refs.tiles.childElementCount )
-							for ( let i = 0; i < n; i++ ) {
-								classes.push(tilename)
+						for( let i = 0; i < q; i++ ) {
+							const d = document.createElement('div')
+							this.$refs.tiles.append(d)
+						}
+					},
+					shuffleTiles: function () {
+						const a = Array.from(this.$refs.tiles.children)
+						shuffleArray(a)
+						a.forEach( $e => $refs.tiles.append($e) )
+					},
+					distribute: function () {
+						let classes = []
+						for ( const tilename in this.collection ) {
+							const tile = this.collection[tilename]
+							if ( tile.active ) {
+								const n = Math.ceil( tile.distribution / this.distribution() * this.$refs.tiles.childElementCount )
+								for ( let i = 0; i < n; i++ ) {
+									classes.push(tilename)
+								}
 							}
 						}
+						shuffleArray(classes)
+
+						Array.from(this.$refs.tiles.children).forEach( $tile => {
+							$tile.className = ''
+							$tile.classList.add( classes.pop() )
+						})
+
+					},
+
+					resize: function () {
+						this.aspectRatio = this.width / this.height
+						this.update()
+					},
+
+					update: function () {
+						this.calculateGrid()
+						this.generateTiles()
+						this.distribute()
 					}
-					shuffleArray(classes)
 
-					Array.from(this.$refs.tiles.children).forEach( $tile => {
-						$tile.className = ''
-						$tile.classList.add( classes.pop() )
-					})
-
-				},
-
-				resize: function () {
-					this.aspectRatio = this.width / this.height
-					this.update()
-				},
-
-				update: function () {
-					this.calculateGrid()
-					this.generateTiles()
-					this.distribute()
 				}
 
-			}))
+			})
 
 		})
 
