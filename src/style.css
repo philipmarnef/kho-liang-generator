@@ -1,0 +1,49 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #999;
+}
+
+#app {
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  height: 10rem;
+  padding: 2rem;
+  font-family: monospace;
+}
+
+.panel .field {
+  display: flex;
+  gap: 1ch;
+}
+
+.panel input[type="number"],
+.panel input[type="range"] {
+  flex-grow: 9
+}
+
+.wall {
+  height: calc(100vh - 18rem);
+  margin: 2rem;
+}
+
+.tiles {
+  display: grid;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid #000;
+  background: #ccc;
+}
+
+.tile {
+  aspect-ratio: 1;
+  background: transparent url('images/tile-16905.png') no-repeat 0 0 / 97.5% 97.5%;
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Vite App</title>
+	</head>
+	<body>
+
+		<div id="app" x-data="app">
+
+			<div class="panel">
+				<div class="panel-dimensions">
+					<p class="field wall-w">
+						<label for="wall-w">Wall width&nbsp;</label>
+						<input type="number" min="0" name="wall-w" id="wall-w" x-model="width" @change="resize()">
+						<span class="unit">cm</span>
+					</p>
+					<p class="field wall-h">
+						<label for="wall-h">Wall height</label>
+						<input type="number" min="0" name="wall-h" id="wall-h" x-model="height" @change="resize()">
+						<span class="unit">cm</span>
+					</p>
+				</div>
+				<!--div class="panel-tiles">
+					<p class="field tile-16900">
+						<label for="active-16900">16900</label>
+						<input type="checkbox" name="active-16900" id="active-16900" checked>
+						<input type="range" name="quantity-16900" id="quantity-16900">
+					</p>
+					<p class="field tile-16905">
+						<label for="active-16905">16905</label>
+						<input type="checkbox" name="active-16905" id="active-16905" checked>
+						<input type="range" name="quantity-16905" id="quantity-16905">
+					</p>
+					<p class="field tile-16906">
+						<label for="active-16906">16906</label>
+						<input type="checkbox" name="active-16906" id="active-16906" checked>
+						<input type="range" name="quantity-16906" id="quantity-16906">
+					</p>
+				</div>
+				<div class="panel-tiles">
+					<p class="field tile-16901-ne">
+						<label for="active-16901-ne">16901 (NE)</label>
+						<input type="checkbox" name="active-16901-ne" id="active-16901-ne" checked>
+						<input type="range" name="quantity-16901-ne" id="quantity-16901-ne">
+					</p>
+					<p class="field tile-16901-se">
+						<label for="active-16901-se">16901 (SE)</label>
+						<input type="checkbox" name="active-16901-se" id="active-16901-se" checked>
+						<input type="range" name="quantity-16901-se" id="quantity-16901-se">
+					</p>
+					<p class="field tile-16901-sw">
+						<label for="active-16901-sw">16901 (SW)</label>
+						<input type="checkbox" name="active-16901-sw" id="active-16901-sw" checked>
+						<input type="range" name="quantity-16901-sw" id="quantity-16901-sw">
+					</p>
+					<p class="field tile-16901-nw">
+						<label for="active-16901-nw">16901 (NW)</label>
+						<input type="checkbox" name="active-16901-nw" id="active-16901-nw" checked>
+						<input type="range" name="quantity-16901-nw" id="quantity-16901-nw">
+					</p>
+				</div-->
+			</div>
+
+			<div class="wall">
+				<div class="tiles" x-ref="tiles" x-init="update()" :style="{ aspectRatio: aspectRatio, gridTemplateColumns: templateColumns, gridTemplateRows: templateRows}"></div>
+			</div>
+
+		</div>
+
+		<script type="module" src="/src/main.js"></script>
+	</body>
+</html>
