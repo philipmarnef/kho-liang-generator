@@ -12,21 +12,26 @@ body {
 
 .panel {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr 2fr;
   gap: 2rem;
   height: 10rem;
   padding: 2rem;
   font-family: monospace;
 }
 
-.panel .field {
+.field {
   display: flex;
   gap: 1ch;
 }
 
-.panel input[type="number"],
-.panel input[type="range"] {
+.field input[type="number"],
+.field input[type="range"] {
   flex-grow: 9
+}
+
+.field label,
+.field span {
+  white-space: nowrap;
 }
 
 .wall {
@@ -43,7 +48,36 @@ body {
   background: #ccc;
 }
 
-.tile {
+.tile16900 {
+  aspect-ratio: 1;
+  background: transparent url('images/tile-16900.png') no-repeat 0 0 / 97.5% 97.5%;
+}
+.tile16905 {
   aspect-ratio: 1;
   background: transparent url('images/tile-16905.png') no-repeat 0 0 / 97.5% 97.5%;
+}
+.tile16906 {
+  aspect-ratio: 1;
+  background: transparent url('images/tile-16906.png') no-repeat 0 0 / 97.5% 97.5%;
+}
+.tile16901ne {
+  aspect-ratio: 1;
+  background: transparent url('images/tile-16901-ne.png') no-repeat 0 0 / 97.5% 97.5%;
+}
+.tile16901se {
+  aspect-ratio: 1;
+  background: transparent url('images/tile-16901-se.png') no-repeat 0 0 / 97.5% 97.5%;
+}
+.tile16901sw {
+  aspect-ratio: 1;
+  background: transparent url('images/tile-16901-sw.png') no-repeat 0 0 / 97.5% 97.5%;
+}
+.tile16901nw {
+  aspect-ratio: 1;
+  background: transparent url('images/tile-16901-nw.png') no-repeat 0 0 / 97.5% 97.5%;
+}
+
+.field label,
+.field span {
+  white-space: nowrap;
 }
