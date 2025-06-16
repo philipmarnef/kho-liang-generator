@@ -27,6 +27,7 @@ export default class App {
 
 					width: this.$persist(265),
 					height: this.$persist(249),
+					align: this.$persist('ltr'),
 					columns: this.$persist(0),
 					rows: this.$persist(0),
 					templateColumns: this.$persist('repeat(26, 1fr)'),

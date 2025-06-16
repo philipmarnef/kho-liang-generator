@@ -12,67 +12,108 @@
 
 			<div class="panel">
 				<div class="panel-dimensions">
-					<p class="field wall-w">
+					<div class="field wall-w">
 						<label for="wall-w">Wall width&nbsp;</label>
 						<input type="number" min="0" name="wall-w" id="wall-w" x-model="width" @change="resize()">
 						<span class="unit">cm</span>
-					</p>
-					<p class="field wall-h">
+					</div>
+					<div class="field wall-h">
 						<label for="wall-h">Wall height</label>
 						<input type="number" min="0" name="wall-h" id="wall-h" x-model="height" @change="resize()">
 						<span class="unit">cm</span>
-					</p>
+					</div>
+					<div class="panel-align">
+						<h4>Align tiles:</h4>
+						<input type="radio" name="align" id="align-ltr" value="ltr" x-model="align">
+						<label for="align-ltr">Left</label>
+						<input type="radio" name="align" id="align-rtl" value="rtl" x-model="align">
+						<label for="align-rtl">Right</label>
+					</div>
 				</div>
 				<div class="panel-tiles">
-					<p class="field tile-16900">
-						<label for="active-16900">16900</label>
-						<input type="checkbox" name="active-16900" id="active-16900" x-model="collection.tile16900.active" @change="distribute()">
-						<input type="range" max="20" name="distribution-16900" id="distribution-16900" :disabled="!collection.tile16900.active" x-model="collection.tile16900.distribution" @change="distribute()">
-						<span x-text="distributionString(collection.tile16900)"></span>
-					</p>
-					<p class="field tile-16905">
-						<label for="active-16905">16905</label>
-						<input type="checkbox" name="active-16905" id="active-16905" x-model="collection.tile16905.active" @change="distribute()">
-						<input type="range" max="20" name="distribution-16905" id="distribution-16905" :disabled="!collection.tile16905.active" x-model="collection.tile16905.distribution" @change="distribute()">
-						<span x-text="distributionString(collection.tile16905)"></span>
-					</p>
-					<p class="field tile-16906">
-						<label for="active-16906">16906</label>
-						<input type="checkbox" name="active-16906" id="active-16906" x-model="collection.tile16906.active" @change="distribute()">
-						<input type="range" max="20" name="distribution-16906" id="distribution-16906" :disabled="!collection.tile16906.active" x-model="collection.tile16906.distribution" @change="distribute()">
-						<span x-text="distributionString(collection.tile16906)"></span>
-					</p>
-				</div>
-				<div class="panel-tiles">
-					<p class="field tile-16901-ne">
-						<label for="active-16901-ne">16901 (NE)</label>
-						<input type="checkbox" name="active-16901-ne" id="active-16901-ne" x-model="collection.tile16901ne.active" @change="distribute()">
-						<input type="range" max="20" name="distribution-16901-ne" id="distribution-16901-ne" :disabled="!collection.tile16901ne.active" x-model="collection.tile16901ne.distribution" @change="distribute()">
-						<span x-text="distributionString(collection.tile16901ne)"></span>
-					</p>
-					<p class="field tile-16901-se">
-						<label for="active-16901-se">16901 (SE)</label>
-						<input type="checkbox" name="active-16901-se" id="active-16901-se" x-model="collection.tile16901se.active" @change="distribute()">
-						<input type="range" max="20" name="distribution-16901-se" id="distribution-16901-se" :disabled="!collection.tile16901se.active" x-model="collection.tile16901se.distribution" @change="distribute()">
-						<span x-text="distributionString(collection.tile16901se)"></span>
-					</p>
-					<p class="field tile-16901-sw">
-						<label for="active-16901-sw">16901 (SW)</label>
-						<input type="checkbox" name="active-16901-sw" id="active-16901-sw" x-model="collection.tile16901sw.active" @change="distribute()">
-						<input type="range" max="20" name="distribution-16901-sw" id="distribution-16901-sw" :disabled="!collection.tile16901sw.active" x-model="collection.tile16901sw.distribution" @change="distribute()">
-						<span x-text="distributionString(collection.tile16901sw)"></span>
-					</p>
-					<p class="field tile-16901-nw">
-						<label for="active-16901-nw">16901 (NW)</label>
-						<input type="checkbox" name="active-16901-nw" id="active-16901-nw" x-model="collection.tile16901nw.active" @change="distribute()">
-						<input type="range" max="20" name="distribution-16901-nw" id="distribution-16901-nw" :disabled="!collection.tile16901nw.active" x-model="collection.tile16901nw.distribution" @change="distribute()">
-						<span x-text="distributionString(collection.tile16901nw)"></span>
-					</p>
+					<div class="field tile-16900">
+						<label for="active-16900">
+							<span class="tile tile16900"></span>
+							<span>16900</span>
+						</label>
+						<div class="inputs">
+							<input type="checkbox" name="active-16900" id="active-16900" x-model="collection.tile16900.active" @change="distribute()">
+							<input type="range" max="20" name="distribution-16900" id="distribution-16900" :disabled="!collection.tile16900.active" x-model="collection.tile16900.distribution" @change="distribute()">
+							<span x-text="distributionString(collection.tile16900)"></span>
+						</div>
+					</div>
+					<div class="field tile-16905">
+						<label for="active-16905">
+							<span class="tile tile16905"></span>
+							<span>16905</span>
+						</label>
+						<div class="inputs">
+							<input type="checkbox" name="active-16905" id="active-16905" x-model="collection.tile16905.active" @change="distribute()">
+							<input type="range" max="20" name="distribution-16905" id="distribution-16905" :disabled="!collection.tile16905.active" x-model="collection.tile16905.distribution" @change="distribute()">
+							<span x-text="distributionString(collection.tile16905)"></span>
+						</div>
+					</div>
+					<div class="field tile-16906">
+						<label for="active-16906">
+							<span class="tile tile16906"></span>
+							<span>16906</span>
+						</label>
+						<div class="inputs">
+							<input type="checkbox" name="active-16906" id="active-16906" x-model="collection.tile16906.active" @change="distribute()">
+							<input type="range" max="20" name="distribution-16906" id="distribution-16906" :disabled="!collection.tile16906.active" x-model="collection.tile16906.distribution" @change="distribute()">
+							<span x-text="distributionString(collection.tile16906)"></span>
+						</div>
+					</div>
+					<p></p>
+					<div class="field tile-16901-ne">
+						<label for="active-16901-ne">
+							<span class="tile tile16901ne"></span>
+							<span>16901 (NE)</span>
+						</label>
+						<div class="inputs">
+							<input type="checkbox" name="active-16901-ne" id="active-16901-ne" x-model="collection.tile16901ne.active" @change="distribute()">
+							<input type="range" max="20" name="distribution-16901-ne" id="distribution-16901-ne" :disabled="!collection.tile16901ne.active" x-model="collection.tile16901ne.distribution" @change="distribute()">
+							<span x-text="distributionString(collection.tile16901ne)"></span>
+						</div>
+					</div>
+					<div class="field tile-16901-se">
+						<label for="active-16901-se">
+							<span class="tile tile16901se"></span>
+							<span>16901 (SE)</span>
+						</label>
+						<div class="inputs">
+							<input type="checkbox" name="active-16901-se" id="active-16901-se" x-model="collection.tile16901se.active" @change="distribute()">
+							<input type="range" max="20" name="distribution-16901-se" id="distribution-16901-se" :disabled="!collection.tile16901se.active" x-model="collection.tile16901se.distribution" @change="distribute()">
+							<span x-text="distributionString(collection.tile16901se)"></span>
+						</div>
+					</div>
+					<div class="field tile-16901-sw">
+						<label for="active-16901-sw">
+							<span class="tile tile16901sw"></span>
+							<span>16901 (SW)</span>
+						</label>
+						<div class="inputs">
+							<input type="checkbox" name="active-16901-sw" id="active-16901-sw" x-model="collection.tile16901sw.active" @change="distribute()">
+							<input type="range" max="20" name="distribution-16901-sw" id="distribution-16901-sw" :disabled="!collection.tile16901sw.active" x-model="collection.tile16901sw.distribution" @change="distribute()">
+							<span x-text="distributionString(collection.tile16901sw)"></span>
+						</div>
+					</div>
+					<div class="field tile-16901-nw">
+						<label for="active-16901-nw">
+							<span class="tile tile16901nw"></span>
+							<span>16901 (NW)</span>
+						</label>
+						<div class="inputs">
+							<input type="checkbox" name="active-16901-nw" id="active-16901-nw" x-model="collection.tile16901nw.active" @change="distribute()">
+							<input type="range" max="20" name="distribution-16901-nw" id="distribution-16901-nw" :disabled="!collection.tile16901nw.active" x-model="collection.tile16901nw.distribution" @change="distribute()">
+							<span x-text="distributionString(collection.tile16901nw)"></span>
+						</div>
+					</div>
 				</div>
 			</div>
 
 			<div class="wall">
-				<div class="tiles" x-ref="tiles" x-init="update()" :style="{ aspectRatio: aspectRatio, gridTemplateColumns: templateColumns, gridTemplateRows: templateRows}"></div>
+				<div class="tiles" :class="align" x-ref="tiles" x-init="update()" :style="{ aspectRatio: aspectRatio, gridTemplateColumns: templateColumns, gridTemplateRows: templateRows}"></div>
 			</div>
 
 		</div>

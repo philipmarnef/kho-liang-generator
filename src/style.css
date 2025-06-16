@@ -7,21 +7,28 @@ body {
   background: #999;
 }
 
-#app {
+.panel {
+  heigth: 20rem;
+  margin: 2rem 0 0;
 }
 
-.panel {
+.panel-dimensions,
+.panel-tiles {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
-  gap: 2rem;
-  height: 10rem;
-  padding: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1lh 2rem;
+  padding: 0 2rem 2rem;
   font-family: monospace;
 }
 
 .field {
   display: flex;
+  align-items: flex-end;
   gap: 1ch;
+}
+
+.field label {
+  width: 30%;
 }
 
 .field input[type="number"],
@@ -34,18 +41,47 @@ body {
   white-space: nowrap;
 }
 
+.field label .tile {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+}
+
+.field .inputs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.field .inputs span {
+  width: 100%;
+}
+
+.panel-align {
+  grid-column: span 2 / span 2;
+}
+
+.panel-align h4 {
+  display: inline-block;
+  margin: 0;
+}
+
 .wall {
-  height: calc(100vh - 18rem);
+  height: calc(100dvh - 20rem);
   margin: 2rem;
 }
 
 .tiles {
   display: grid;
+  direction: ltr;
   max-height: 100%;
   max-width: 100%;
   overflow: hidden;
   border: 1px solid #000;
-  background: #ccc;
+  background: #d8d8d8;
+}
+
+.tiles.rtl {
+  direction: rtl;
 }
 
 .tile16900 {
@@ -75,9 +111,4 @@ body {
 .tile16901nw {
   aspect-ratio: 1;
   background: transparent url('images/tile-16901-nw.png') no-repeat 0 0 / 97.5% 97.5%;
-}
-
-.field label,
-.field span {
-  white-space: nowrap;
 }
