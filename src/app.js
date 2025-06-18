@@ -83,7 +83,7 @@ export default class App {
 						const pct = Math.round(tile.distribution / total * 10000) / 100
 						const amount = Math.round( tile.distribution / total * totalTiles ) 
 
-						return `${tile.distribution} / ${total} = ${amount} / ${totalTiles} tiles) (${pct}%)`
+						return `${tile.distribution} / ${total} = ${amount} / ${totalTiles} tiles (${pct}%)`
 					},
 
 					calculateGrid: function () {
