@@ -3,8 +3,8 @@ import persist from '@alpinejs/persist'
  
 Alpine.plugin(persist)
 
-const W_TILE = 10
-const W_JOINT = .25
+const W_TILE = 9.7
+const W_JOINT = .3
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
