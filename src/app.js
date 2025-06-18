@@ -79,9 +79,11 @@ export default class App {
 					distributionString: function (tile) {
 						if ( !tile.active ) return '';
 						const total = this.distribution()
+						const totalTiles = this.columns * this.rows
 						const pct = Math.round(tile.distribution / total * 10000) / 100
+						const amount = Math.round( tile.distribution / total * totalTiles ) 
 
-						return `${tile.distribution} / ${total} (${pct}%)`
+						return `${tile.distribution} / ${total} = ${amount} / ${totalTiles} tiles) (${pct}%)`
 					},
 
 					calculateGrid: function () {
